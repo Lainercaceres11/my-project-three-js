@@ -1,22 +1,18 @@
-import { defineConfig } from "vite";
 import restart from "vite-plugin-restart";
 
-export default defineConfig({
-  root: "src/", // Entrada desde src/index.html
-  publicDir: "../static/", // Archivos estáticos
+export default {
+  root: "src/", // Sources files (typically where index.html is)
+  publicDir: "../static/", // Path from "root" to static assets (files that are served as they are)
   server: {
-    host: true,
-    open: !("SANDBOX_URL" in process.env || "CODESANDBOX_HOST" in process.env),
+    host: true, // Open to local network and display URL
+    open: !("SANDBOX_URL" in process.env || "CODESANDBOX_HOST" in process.env), // Open if it's not a CodeSandbox
   },
   build: {
-    outDir: "../dist", // Salida fuera de src
-    emptyOutDir: true,
-    sourcemap: true,
+    outDir: "../dist", // Output in the dist/ folder
+    emptyOutDir: true, // Empty the folder first
+    sourcemap: true, // Add sourcemap
   },
-  base: "./", // ✅ Importante para rutas relativas correctas en producción
   plugins: [
-    restart({
-      restart: ["../static/**"],
-    }),
+    restart({ restart: ["../static/**"] }), // Restart server on static file change
   ],
-});
+};
