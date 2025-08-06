@@ -198,7 +198,7 @@ const roof = new THREE.Mesh(
 
 roof.position.y = 2.5 + 0.75;
 roof.rotation.y = Math.PI * 0.5;
-scene.add(roof);
+house.add(roof);
 
 //Door
 const door = new THREE.Mesh(
